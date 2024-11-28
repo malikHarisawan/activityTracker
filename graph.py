@@ -2,7 +2,8 @@ import json
 import matplotlib.pyplot as plt
 
 fig, ax = None, None
-def plot_chart():
+
+def plot_chart(date):
     global fig, ax
 
     if fig is None or ax is None:
@@ -10,21 +11,34 @@ def plot_chart():
 
     ax.clear()
 
-    with open('activity_data.json') as f:
-        data = json.load(f)
-    
-    app_names = [app for app, total_time in data.items()]
-    time_spent = [total_time for app, total_time in data.items()]
+    apps = []
+    times = []
 
-    # Create the bar plot
-    bars = ax.bar(app_names, time_spent, color='blue')
+    try:
+        with open("activity_data.json") as f:
+            data = json.load(f)
+            if date and date in data:
+                day_data = data[date]
+                apps = list(day_data.keys())
+                times = list(day_data.values())
+            else:
+                raise KeyError(f"The date {date} does not exist in the data.")
+    except KeyError as e:
+        print(f"Error: {e}")
+        apps = ["No Data"]
+        times = [0]
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
+        apps = ["No Data"]
+        times = [0]
+
+    ax.bar(apps, times, color="blue")
     ax.set_title("Time Spent on Applications")
     ax.set_xlabel("Applications")
     ax.set_ylabel("Time Spent (seconds)")
 
-    # Set the tick labels
-    ax.set_xticks(range(len(app_names)))  # Set the ticks to be at the correct positions
-    ax.set_xticklabels(app_names, rotation=45)  # Set the tick labels
+    ax.set_xticks(range(len(apps)))
+    ax.set_xticklabels(apps, rotation=45)
 
     plt.tight_layout()
 
