@@ -1,0 +1,17 @@
+{
+    "exe_to_category": {
+        "Code.exe": "Development",
+        "python.exe": "Work",
+        "explorer.exe": "File Management",
+        "Spotify.exe": "Entertainment"
+    },
+    "title_to_category": {
+        "Visual Studio Code": "Development",
+        "Google Chrome": "Entertainment",
+        "ChatGPT - Google Chrome": "Entertainment",
+        "YouTube": "Entertainment",
+        "Skype": "Communication",
+        "WhatsApp": "Communication",
+        "Zoom": "Communication"
+    }
+}
