@@ -1,17 +1,17 @@
 {
     "exe_to_category": {
-        "Code.exe": "Development",
-        "python.exe": "Work",
-        "explorer.exe": "File Management",
-        "Spotify.exe": "Entertainment"
+        "python": "Development",
+        "Skype": "Communication",
+        "chrome.exe": "Web Browsing",
+        "code.exe": "Development",
+        "explorer.exe": "File Management"
     },
     "title_to_category": {
-        "Visual Studio Code": "Development",
-        "Google Chrome": "Entertainment",
-        "ChatGPT - Google Chrome": "Entertainment",
+        "ChatGPT": "Research",
         "YouTube": "Entertainment",
-        "Skype": "Communication",
-        "WhatsApp": "Communication",
-        "Zoom": "Communication"
+        "Visual Studio Code": "Development",
+        "File Explorer": "File Management",
+        "Google Chrome": "Web Browsing",
+        "Error": "Uncategorized"
     }
 }

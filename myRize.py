@@ -284,21 +284,27 @@ from matplotlib.figure import Figure
 from categorization import categorize_apps
 from categorized_graph import show_categorized_graph  # Import the function
 
-def get_active_application():
-    """Retrieve the name and description of the currently active application."""
+def get_exe_description(file_path):
+    """Retrieve the description of the executable, if available."""
     try:
-        hwnd = win32gui.GetForegroundWindow()
-        _, pid = win32process.GetWindowThreadProcessId(hwnd)
+        info = win32api.GetFileVersionInfo(
+            file_path, "\\StringFileInfo\\040904b0\\FileDescription"
+        )
+        return info
+    except Exception:
+        return "No Description Available"
+
+def get_active_window():
+    """Retrieve the title of the currently active window."""
+    hwnd = win32gui.GetForegroundWindow()
+    _, pid = win32process.GetWindowThreadProcessId(hwnd)
+    try:
         process = psutil.Process(pid)
+        window_title = win32gui.GetWindowText(hwnd)  # Active window title
+        return window_title.strip(), pid  # Return the window title and process ID
+    except (psutil.NoSuchProcess, psutil.AccessDenied):
+        return None, None
 
-        app_name = process.name()  # Name of the application executable
-        window_title = win32gui.GetWindowText(hwnd)  # Title of the active window
-
-        # Combine app name and window title for better identification
-        return f"{app_name} ({window_title.strip()})" if window_title else app_name
-    except Exception as e:
-        print(f"Error retrieving active application: {e}")
-        return None
 
 class ActiveWindowMonitor(QMainWindow):
     def __init__(self):
@@ -306,7 +312,7 @@ class ActiveWindowMonitor(QMainWindow):
         self.setup_ui()
         self.time_spent = {}
         self.last_switch_time = time.time()
-        self.last_app = None
+        self.last_title = None
         self.load_data()
 
         self.timer = QTimer(self)
@@ -389,9 +395,9 @@ class ActiveWindowMonitor(QMainWindow):
     def update_active_window(self):
         current_date = time.strftime("%Y-%m-%d")
         current_time = time.time()
-        current_app = get_active_application()
+        window_title, _ = get_active_window()
 
-        if not current_app:
+        if not window_title:
             return
 
         if not hasattr(self, "last_date"):
@@ -399,23 +405,18 @@ class ActiveWindowMonitor(QMainWindow):
 
         if current_date != self.last_date:
             self.last_switch_time = current_time
-            self.last_app = None
+            self.last_title = None
             self.last_date = current_date
 
-        if current_app != self.last_app:
-            if self.last_app is not None:
+        if window_title != self.last_title:
+            if self.last_title is not None:
                 time_diff = current_time - self.last_switch_time
 
-                app_name, window_title = self.last_app.split("(", 1) if "(" in self.last_app else (self.last_app, "")
-                window_title = window_title.rstrip(")")
-
                 self.time_spent.setdefault(self.last_date, {})
-                self.time_spent[self.last_date].setdefault(app_name, {})
-                self.time_spent[self.last_date][app_name].setdefault(window_title, 0)
+                self.time_spent[self.last_date].setdefault(self.last_title, 0)
+                self.time_spent[self.last_date][self.last_title] += time_diff
 
-                self.time_spent[self.last_date][app_name][window_title] += time_diff
-
-            self.last_app = current_app
+            self.last_title = window_title
             self.last_switch_time = current_time
 
     def load_data(self):
@@ -427,11 +428,11 @@ class ActiveWindowMonitor(QMainWindow):
         current_time = time.time()
         current_date = time.strftime("%Y-%m-%d")
 
-        if self.last_app:
+        if self.last_title:
             time_diff = current_time - self.last_switch_time
             self.time_spent.setdefault(current_date, {})
-            self.time_spent[current_date].setdefault(self.last_app, 0)
-            self.time_spent[current_date][self.last_app] += time_diff
+            self.time_spent[current_date].setdefault(self.last_title, 0)
+            self.time_spent[current_date][self.last_title] += time_diff
 
             self.last_switch_time = current_time
 
@@ -442,7 +443,10 @@ class ActiveWindowMonitor(QMainWindow):
         self.save_data()
         event.accept()
 
+
 app = QApplication(sys.argv)
 window = ActiveWindowMonitor()
 window.show()
 sys.exit(app.exec())
+
+
