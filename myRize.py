@@ -6,6 +6,8 @@ import win32api
 import time
 import json
 import os
+os.environ['QT_ENABLE_HIGHDPI_SCALING'] = '0'
+os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
 from graph import plot_chart
 from PyQt6.QtCore import QTimer, QEventLoop, QDate
 from PyQt6.QtWidgets import (
@@ -13,16 +15,18 @@ from PyQt6.QtWidgets import (
     QHBoxLayout,
     QDateEdit,
     QPushButton,
-    QLabel,
     QMainWindow,
     QVBoxLayout,
     QWidget,
     QMessageBox,
 )
-
+from category_manager import CategoryManager
+from config import APP_CATEGORIES
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
-
+from pywinauto import Application
+import matplotlib.pyplot as plt
+from urllib.parse import urlparse
 
 def get_exe_description(file_path):
     try:
@@ -42,20 +46,39 @@ def get_active_window():
         process_title = process.name()
         file_path = process.exe()
         window_title = win32gui.GetWindowText(hwnd)
-        process_description = get_exe_description(file_path)
-        return process_title, process_description, window_title, pid
+       
+        active_app = None
+        if process_title.lower() != "chrome.exe":
+             active_app = get_exe_description(file_path)
+             return active_app
+        elif process_title.lower() == "chrome.exe":
+            try:
+                app = Application(backend='uia')
+                app.connect(process=pid)
+                dlg = app.top_window()
+                element_name = "Address and search bar"
+                url_bar = dlg.child_window(title=element_name, control_type="Edit")
+
+                url = url_bar.get_value()
+                if not url.startswith(('http://', 'https://')):
+                    url = 'https://' + url
+  
+                parsed_url = urlparse(url)
+                active_app = parsed_url.netloc
+                return active_app
+            except Exception:
+                return None
     except (psutil.NoSuchProcess, psutil.AccessDenied):
-        return None, None, None, None
+        return None
 
 
 class ActiveWindowMonitor(QMainWindow):
     def __init__(self):
         super().__init__()
-
+        self.category_manager = CategoryManager(APP_CATEGORIES)
         main_layout = QVBoxLayout()
         button_layout = QHBoxLayout()
-
-        # Create Widgets
+        
         self.decrement_button = QPushButton("◀", self)
         self.increment_button = QPushButton("▶", self)
         self.date_edit = QDateEdit(self)
@@ -67,7 +90,7 @@ class ActiveWindowMonitor(QMainWindow):
         button_layout.addWidget(self.increment_button)
         cur_date = self.date_edit.date()
         cur_date = cur_date.toString("yyyy-MM-dd")
-        self.figure = plot_chart(cur_date)
+        self.figure, _ = plot_chart(cur_date)
         self.canvas = FigureCanvasQTAgg(self.figure)
 
         main_layout.addLayout(button_layout)
@@ -87,9 +110,10 @@ class ActiveWindowMonitor(QMainWindow):
 
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update_active_window)
-        self.timer.start(1000)  # Update every second
+        self.timer.start(1000)
 
         self.isPopUpActive = False
+        # save data real time
         # self.save_timer = QTimer(self)
         # self.save_timer.timeout.connect(self.save_data)
         # self.save_timer.start(1000)
@@ -110,10 +134,11 @@ class ActiveWindowMonitor(QMainWindow):
 
     def update_label(self, date):
         new_date = date.toString("yyyy-MM-dd")
-        self.figure = plot_chart(new_date)
+        plt.close(self.figure)
+        self.figure.clear()
+        self.figure, _ = plot_chart(new_date)
         self.canvas.figure = self.figure
         self.canvas.draw()
-
 
     def show_popup(self, current_app, title):
         if self.isPopUpActive:
@@ -172,13 +197,12 @@ class ActiveWindowMonitor(QMainWindow):
     def update_active_window(self):
         current_date = time.strftime("%Y-%m-%d")
         current_time = time.time()
-        process_name, process_description, window_name, pid = get_active_window()
-        win_app = window_name.split("-")[-1].strip()
+        active_app = get_active_window()
 
-        if process_description == "Application Frame Host":
-            current_app = win_app
-        else:
-            current_app = process_description
+        # if active_app:
+        #    print(active_app)
+
+        current_app = active_app
 
         # if process_name not in self.allowed_apps:
         #     self.close_unallowed_app(process_name, win_app)
@@ -187,28 +211,32 @@ class ActiveWindowMonitor(QMainWindow):
             self.last_date = current_date
 
         if current_date != self.last_date:
+            self.save_data()
             self.last_switch_time = current_time
             self.last_app = None
             self.last_date = current_date
 
-        if current_app != self.last_app and process_description:
+        if current_app != self.last_app:
             if self.last_app is not None:
                 time_diff = current_time - self.last_switch_time
+                
                 if self.last_date not in self.time_spent:
-                    self.time_spent.setdefault(self.last_date, {})
-                if self.last_app not in self.time_spent[self.last_date]:
-                    self.time_spent[self.last_date][self.last_app] = 0
+                    self.time_spent[self.last_date] = {"apps": {}, "categories": {}}
+                
+                if self.last_app not in self.time_spent[self.last_date]["apps"]:
+                    self.time_spent[self.last_date]["apps"][self.last_app] = 0
+                
+                self.time_spent[self.last_date]["apps"][self.last_app] += time_diff
+                
+                category = self.category_manager.get_app_category(self.last_app)
+                if category not in self.time_spent[self.last_date]["categories"]:
+                    self.time_spent[self.last_date]["categories"][category] = 0
+                
+                self.time_spent[self.last_date]["categories"][category] += time_diff
 
-                self.time_spent[self.last_date][self.last_app] += time_diff
 
             self.last_app = current_app
             self.last_switch_time = current_time
-
-        if current_app in self.time_spent:
-            label, total_time = self.time_spent[current_app]
-            label.setText(
-                f"{current_app}: {total_time + (current_time - self.last_switch_time):.2f} seconds"
-            )
 
         # self.figure = plot_chart()
         # self.canvas.figure = self.figure
@@ -218,7 +246,6 @@ class ActiveWindowMonitor(QMainWindow):
         if os.path.exists("activity_data.json"):
             with open("activity_data.json", "r") as file:
                 self.time_spent = json.load(file)
-                print(self.time_spent)
 
     def save_data(self):
         if self.isPopUpActive:
@@ -228,12 +255,21 @@ class ActiveWindowMonitor(QMainWindow):
         current_date = time.strftime("%Y-%m-%d")
 
         if self.last_app:
-            time_diff = current_time - self.last_switch_time
-            self.time_spent.setdefault(current_date, {})
-            self.time_spent[current_date].setdefault(self.last_app, 0)
-            self.time_spent[current_date][self.last_app] += time_diff
 
+            time_diff = current_time - self.last_switch_time
+
+            if self.last_date not in self.time_spent[self.last_date]:
+                 self.time_spent[self.last_date] = {"apps": {}, "categories": {}}
             self.last_switch_time = current_time
+
+            if self.last_app not in self.time_spent[self.last_date]["apps"]:
+                self.time_spent[self.last_date]["apps"][self.last_app] = 0
+            self.time_spent[self.last_date]["apps"][self.last_app] += time_diff
+                
+            category = self.category_manager.get_app_category(self.last_app)
+            if category not in self.time_spent[self.last_date]["categories"]:
+                self.time_spent[self.last_date]["categories"][category] = 0    
+            self.time_spent[self.last_date]["categories"][category] += time_diff
 
         with open("activity_data.json", "w") as file:
             json.dump(self.time_spent, file)
