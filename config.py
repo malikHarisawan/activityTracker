@@ -4,7 +4,7 @@ APP_CATEGORIES = {
         "description": "Development and coding activities"
     },
     "Reference & Learning": {
-        "apps": ["quora.com","youtube.com" "chatgpt.com","google.com","vulms.vu.edu.pk","udemy.com"],
+        "apps": ["quora.com","youtube.com", "chatgpt.com","google.com","vulms.vu.edu.pk","udemy.com"],
         "description": "Web browsing and research activities"
     },
     "Communication": {
@@ -12,7 +12,7 @@ APP_CATEGORIES = {
         "description": "Email and messaging applications"
     },
     "Utilities": {
-        "apps": ["Google Chrome", "Microsoft Edge","Notepad.exe" "Task Manager", "Windows Explorer", "File Explorer","Application Frame Host"],
+        "apps": ["Microsoft Edge","Notepad.exe" "Task Manager", "Windows Explorer", "File Explorer","Application Frame Host"],
         "description": "System utilities and tools"
     },
     "Miscellaneous": {

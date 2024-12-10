@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from datetime import datetime
 
 import matplotlib.pyplot as plt
 
@@ -7,7 +8,7 @@ APP_CATEGORIES = {
     "Software Development": {"color": "#2E7D32"},   # Green
     "Reference & Learning": {"color": "#1976D2"},   # Blue
     "Communication": {"color": "#C62828"}, # Red
-    "Utility": {"color": "#F9A825"},      # Yellow
+    "Utilities": {"color": "#F9A825"},      # Yellow
     "Miscellaneous": {"color": "#757575"}  # Grey
 }
 
@@ -31,52 +32,73 @@ def get_data_for_date(date):
     except json.JSONDecodeError:
         return {}
 
-def handle_empty_data(fig, ax1):
+def handle_empty_data(fig, ax3):
     """Handle the case when there is no data to display"""
-    ax1.text(0.5, 0.5, 'No data available', horizontalalignment='center', verticalalignment='center', transform=ax1.transAxes)
+    ax3.text(0.5, 0.5, 'No data available', horizontalalignment='center', verticalalignment='center', transform=ax3.transAxes)
     #ax2.text(0.5, 0.5, 'No data available', horizontalalignment='center', verticalalignment='center', transform=ax2.transAxes)
     plt.tight_layout()
-    return fig, (ax1)
+    return fig, (ax3)
+
+
+
+
 def plot_chart(date):
-    """Create horizontal bar, vertical bar, and pie charts for category usage on a given date"""
-    fig, (ax2, ax3, ax1) = plt.subplots(1, 3, figsize=(20, 6))
-    
+    fig, (ax2, ax3, ax1) = plt.subplots(1, 3, figsize=(20, 6))  # Added ax4 for hourly chart
+
     # Load data
     data = get_data_for_date(date)
     if not data or "categories" not in data:
-        return handle_empty_data(fig, ax1)
+        return handle_empty_data(fig, ax3)
 
-    # Extract categories and times
     categories = list(data["categories"].keys())
+    
     times = list(data["categories"].values())
     colors = [
         APP_CATEGORIES.get(cat, APP_CATEGORIES["Miscellaneous"])["color"]
         for cat in categories
     ]
-
     total_time = sum(times)
     percentages = [(time / total_time) * 100 for time in times]
 
-    ax2.bar(categories, percentages, color=colors)
-    ax2.set_title("Category")
-    ax2.set_xlabel("Categories")
-    ax2.set_ylabel("Percentage (%)")
-    ax2.tick_params(axis='x', rotation=45)
-  
-    for i, v in enumerate(percentages):
-        ax2.text(i, v + 1, f"{v:.1f}%", ha='center')
-
-
-    ax3.pie(times, labels=categories, colors=colors, autopct='%1.1f%%')
-    ax3.set_title("Category Distribution")
-
+    # Horizontal bar chart
     ax1.barh(categories, percentages, color=colors)
     ax1.set_title("Time Spent by Category")
-    ax1.set_xlabel("Categories")
-    ax1.set_ylabel("Percentage (%)")
+    ax1.set_xlabel("Percentage (%)")
     ax1.invert_yaxis()  # Largest on top
     for i, v in enumerate(percentages):
         ax1.text(v + 1, i, f"{v:.1f}%", va='center')
+
     
+    explode = tuple(0.1 if i == 1 else 0 for i in range(len(categories))) 
+   
+    ax3.pie(times, explode=explode, labels=None, autopct='%1.1f%%',
+       shadow=True, startangle=90,colors = colors)
+    ax3.set_title("Category Distribution")
+   
+
+  
+    hourly_data = data.get("hourly", {})
+    if hourly_data:
+        hours = sorted(hourly_data.keys(), key=lambda h: datetime.strptime(h, '%H:%M'))
+        hours_display = hours  
+
+        category_times = {
+            cat: [hourly_data.get(hour, {}).get("categories", {}).get(cat, 0) / 60 for hour in hours]
+            for cat in APP_CATEGORIES.keys()
+        }
+
+        bottom = [0] * len(hours)
+        for category, times in category_times.items():
+            if any(times):
+                ax2.bar(hours_display, times, bottom=bottom, label=category, color=APP_CATEGORIES[category]["color"])
+                bottom = [b + t for b, t in zip(bottom, times)]
+
+        ax2.set_title("Hourly Category Usage")
+        ax2.set_xlabel("Hour of Day")
+        ax2.set_ylabel("Time Spent (Minutes)")
+        ax2.legend(title="Categories", bbox_to_anchor=(1.05, 1), loc='upper left')
+        ax2.tick_params(axis='x', rotation=45)
+
+
     plt.tight_layout()
-    return fig, (ax2, ax3, ax1)
+    return fig, ( ax3, ax1, ax2)

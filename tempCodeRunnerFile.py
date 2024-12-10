@@ -1,1 +1,2 @@
-APP_CATEGORIES
+
+        self.start_time = time.time()

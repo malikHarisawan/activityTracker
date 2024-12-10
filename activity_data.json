@@ -1,1 +1,386 @@
-{"2024-11-23": {"apps": {"Visual Studio Code": 180.5, "PyCharm": 45.2, "Google Chrome": 120.3, "Microsoft Teams": 30.5, "Calculator": 15.2}, "categories": {"WORK": 225.7, "RESEARCH": 120.3, "COMMUNICATION": 30.5, "UTILITY": 15.2}}, "2024-11-24": {"apps": {"Visual Studio Code": 240.1, "ChatGPT": 90.5, "Outlook": 45.8, "Windows Explorer": 25.3}, "categories": {"WORK": 240.1, "RESEARCH": 90.5, "COMMUNICATION": 45.8, "UTILITY": 25.3}}, "2024-11-25": {"apps": {"Visual Studio Code": 195.6, "Google Chrome": 150.2, "Skype": 60.4, "Task Manager": 10.8}, "categories": {"WORK": 195.6, "RESEARCH": 150.2, "COMMUNICATION": 60.4, "UTILITY": 10.8}}, "2024-11-26": {"apps": {"Visual Studio Code": 210.3, "Microsoft Edge": 85.7, "Discord": 55.2, "Calculator": 20.5}, "categories": {"WORK": 210.3, "RESEARCH": 85.7, "COMMUNICATION": 55.2, "UTILITY": 20.5}}, "2024-11-27": {"apps": {"Visual Studio Code": 165.8, "Firefox": 110.4, "Teams": 75.3, "File Explorer": 18.6}, "categories": {"WORK": 165.8, "RESEARCH": 110.4, "COMMUNICATION": 75.3, "UTILITY": 18.6}}, "2024-11-28": {"apps": {"Visual Studio Code": 225.4, "ChatGPT": 95.8, "Outlook": 40.2, "Calculator": 22.1}, "categories": {"WORK": 225.4, "RESEARCH": 95.8, "COMMUNICATION": 40.2, "UTILITY": 22.1}}, "2024-11-29": {"apps": {"Visual Studio Code": 11.52, "Calculator": 66.78}, "categories": {"WORK": 11.52, "UTILITY": 66.78}}, "2024-12-03": {"apps": {"Visual Studio Code": 48.32498860359192, "Calculator": 7.040309190750122, "Google Chrome": 105.75130105018616, "Windows Explorer": 55.07609462738037, "WindowsTerminal.exe": 14.991468667984009, "Microsoft Edge": 80.52029490470886, "Application Frame Host": 75.36387372016907, "Notepad.exe": 6.77184271812439}, "categories": {"WORK": 53.93476939201355, "UTILITY": 99.95528244972229, "RESEARCH": 186.27159595489502, "UNCATEGORIZED": 102.23162388801575}}, "2024-12-04": {"apps": {"Rize": 20.541229724884033, "wikipedia.org": 4.038106679916382, "": 1.0123786926269531, "wiki.python.org": 8.072427988052368, "comrex.pk": 19.74870705604553, "Visual Studio Code": 11.05781602859497, "Microsoft Edge": 0.9970829486846924, "mail.google.com": 5.032729864120483, "chatgpt.com": 199.57770156860352, "Skype": 9.022155523300171}, "categories": {"Miscellaneous": 12.9905517101288, "Software Development": 11.05781602859497, "Utilities": 0.9970829486846924, "Communication": 14.054885387420654}}, "2024-12-05": {"apps": {"Visual Studio Code": 6.000330209732056}, "categories": {"Software Development": 6.000330209732056}}}
+{
+    "2024-11-23": {
+        "apps": {
+            "Visual Studio Code": 180.5,
+            "PyCharm": 45.2,
+            "Google Chrome": 120.3,
+            "Microsoft Teams": 30.5,
+            "Calculator": 15.2
+        },
+        "categories": {
+            "WORK": 225.7,
+            "RESEARCH": 120.3,
+            "COMMUNICATION": 30.5,
+            "UTILITY": 15.2
+        }
+    },
+    "2024-11-24": {
+        "apps": {
+            "Visual Studio Code": 240.1,
+            "ChatGPT": 90.5,
+            "Outlook": 45.8,
+            "Windows Explorer": 25.3
+        },
+        "categories": {
+            "WORK": 240.1,
+            "RESEARCH": 90.5,
+            "COMMUNICATION": 45.8,
+            "UTILITY": 25.3
+        }
+    },
+    "2024-11-25": {
+        "apps": {
+            "Visual Studio Code": 195.6,
+            "Google Chrome": 150.2,
+            "Skype": 60.4,
+            "Task Manager": 10.8
+        },
+        "categories": {
+            "WORK": 195.6,
+            "RESEARCH": 150.2,
+            "COMMUNICATION": 60.4,
+            "UTILITY": 10.8
+        }
+    },
+    "2024-11-26": {
+        "apps": {
+            "Visual Studio Code": 210.3,
+            "Microsoft Edge": 85.7,
+            "Discord": 55.2,
+            "Calculator": 20.5
+        },
+        "categories": {
+            "WORK": 210.3,
+            "RESEARCH": 85.7,
+            "COMMUNICATION": 55.2,
+            "UTILITY": 20.5
+        }
+    },
+    "2024-11-27": {
+        "apps": {
+            "Visual Studio Code": 165.8,
+            "Firefox": 110.4,
+            "Teams": 75.3,
+            "File Explorer": 18.6
+        },
+        "categories": {
+            "WORK": 165.8,
+            "RESEARCH": 110.4,
+            "COMMUNICATION": 75.3,
+            "UTILITY": 18.6
+        }
+    },
+    "2024-11-28": {
+        "apps": {
+            "Visual Studio Code": 225.4,
+            "ChatGPT": 95.8,
+            "Outlook": 40.2,
+            "Calculator": 22.1
+        },
+        "categories": {
+            "WORK": 225.4,
+            "RESEARCH": 95.8,
+            "COMMUNICATION": 40.2,
+            "UTILITY": 22.1
+        }
+    },
+    "2024-11-29": {
+        "apps": {
+            "Visual Studio Code": 11.52,
+            "Calculator": 66.78
+        },
+        "categories": {
+            "WORK": 11.52,
+            "UTILITY": 66.78
+        }
+    },
+    "2024-12-03": {
+        "apps": {
+            "Visual Studio Code": 48.32498860359192,
+            "Calculator": 7.040309190750122,
+            "Google Chrome": 105.75130105018616,
+            "Windows Explorer": 55.07609462738037,
+            "WindowsTerminal.exe": 14.991468667984009,
+            "Microsoft Edge": 80.52029490470886,
+            "Application Frame Host": 75.36387372016907,
+            "Notepad.exe": 6.77184271812439
+        },
+        "categories": {
+            "WORK": 53.93476939201355,
+            "UTILITY": 99.95528244972229,
+            "RESEARCH": 186.27159595489502,
+            "UNCATEGORIZED": 102.23162388801575
+        }
+    },
+    "2024-12-04": {
+        "apps": {
+            "Rize": 20.541229724884033,
+            "wikipedia.org": 4.038106679916382,
+            "": 1.0123786926269531,
+            "wiki.python.org": 8.072427988052368,
+            "comrex.pk": 19.74870705604553,
+            "Visual Studio Code": 11.05781602859497,
+            "Microsoft Edge": 0.9970829486846924,
+            "mail.google.com": 5.032729864120483,
+            "chatgpt.com": 199.57770156860352,
+            "Skype": 9.022155523300171
+        },
+        "categories": {
+            "Miscellaneous": 12.9905517101288,
+            "Software Development": 11.05781602859497,
+            "Utilities": 0.9970829486846924,
+            "Communication": 14.054885387420654
+        }
+    },
+    "2024-12-05": {
+        "apps": {
+            "Windows Explorer": 19.51990008354187,
+            "Visual Studio Code": 189.96866607666016,
+            "Task Manager": 58.49982047080994,
+            "Microsoft Edge": 6.113246917724609,
+            "Application Frame Host": 6.008553743362427,
+            "Skype": 6.1124186515808105,
+            "": 28.245722770690918,
+            "chat.openai.com": 3.0322349071502686,
+            "chatgpt.com": 85.82945084571838
+        },
+        "categories": {
+            "Utilities": 31.641700744628906,
+            "Software Development": 189.96866607666016,
+            "Miscellaneous": 89.77777814865112,
+            "Communication": 6.1124186515808105,
+            "Reference & Learning": 85.82945084571838
+        }
+    },
+    "2024-12-06": {
+        "apps": {
+            "Visual Studio Code": 38.29853701591492,
+            "Windows Explorer": 1.0012028217315674,
+            "": 2.0254032611846924
+        },
+        "categories": {
+            "Software Development": 38.29853701591492,
+            "Utilities": 1.0012028217315674,
+            "Miscellaneous": 2.0254032611846924
+        },
+        "hourly": {}
+    },
+    "2024-12-09": {
+        "apps": {
+            "Visual Studio Code": 3070.0123147964478,
+            "qurangarden.com": 12.443777561187744,
+            "Windows Explorer": 155.5264618396759,
+            "": 44.19556641578674,
+            "help.rescuetime.com": 1.7397074699401855,
+            "Microsoft Edge": 114.87764406204224,
+            "Skype": 118.04826617240906,
+            "Application Frame Host": 66.72356867790222,
+            "chatgpt.com": 675.1668338775635,
+            "Microsoft Visual Studio 2022": 2.9979593753814697,
+            "Windows Start Experience Host": 6.031346321105957,
+            "rescuetime.com": 207.18656992912292,
+            "rize.io": 2.001809597015381,
+            "ri": 2.017181396484375,
+            "r": 2.029536724090576,
+            "resume.com": 4.0104079246521,
+            "LockApp.exe": 965.3981943130493,
+            "haz": 0.9856674671173096,
+            "hazra": 1.0125184059143066,
+            "hazrat ": 1.0248656272888184,
+            "hazrat fatima": 1.010075330734253,
+            "hazrat farima ": 3.0364766120910645,
+            "google.com": 124.20949387550354
+        },
+        "categories": {
+            "Software Development": 3073.010274171829,
+            "Miscellaneous": 1248.090497970581,
+            "Utilities": 337.12767457962036,
+            "Communication": 118.04826617240906,
+            "Reference & Learning": 799.376327753067
+        },
+        "hourly": {
+            "10:00": {
+                "apps": {
+                    "Visual Studio Code": 345.6578617095947,
+                    "chatgpt.com": 9.059420585632324,
+                    "": 7.022255182266235,
+                    "Windows Explorer": 5.801459074020386,
+                    "Skype": 30.61605954170227,
+                    "rescuetime.com": 40.90488529205322,
+                    "rize.io": 1.0009047985076904,
+                    "ri": 1.0085906982421875,
+                    "r": 1.014768362045288,
+                    "resume.com": 2.00520396232605
+                },
+                "categories": {
+                    "Software Development": 345.6578617095947,
+                    "Reference & Learning": 9.059420585632324,
+                    "Miscellaneous": 52.956608295440674,
+                    "Utilities": 5.801459074020386,
+                    "Communication": 30.61605954170227
+                }
+            },
+            "11:00": {
+                "apps": {
+                    "Visual Studio Code": 101.35923862457275,
+                    "Windows Explorer": 1.8536245822906494,
+                    "": 3.0010204315185547,
+                    "chatgpt.com": 290.00906586647034
+                },
+                "categories": {
+                    "Software Development": 101.35923862457275,
+                    "Utilities": 1.8536245822906494,
+                    "Reference & Learning": 290.00906586647034
+                }
+            },
+            "12:00": {
+                "apps": {
+                    "Visual Studio Code": 38.27106761932373
+                },
+                "categories": {
+                    "Software Development": 38.27106761932373
+                }
+            },
+            "15:00": {
+                "apps": {
+                    "Visual Studio Code": 329.2411060333252,
+                    "chatgpt.com": 334.93405270576477,
+                    "Windows Explorer": 56.330469369888306,
+                    "Application Frame Host": 43.75511693954468,
+                    "Microsoft Edge": 65.53926038742065,
+                    "": 3.036113739013672,
+                    "haz": 0.9856674671173096,
+                    "hazra": 1.0125184059143066,
+                    "hazrat ": 1.0248656272888184,
+                    "hazrat fatima": 1.010075330734253,
+                    "hazrat farima ": 3.0364766120910645,
+                    "google.com": 124.20949387550354,
+                    "LockApp.exe": 12.50394058227539
+                },
+                "categories": {
+                    "Software Development": 329.2411060333252,
+                    "Reference & Learning": 459.1435465812683,
+                    "Utilities": 165.62484669685364,
+                    "Miscellaneous": 22.609657764434814
+                }
+            },
+            "16:00": {
+                "apps": {
+                    "Visual Studio Code": 24.215697288513184,
+                    "Windows Explorer": 29.928162574768066,
+                    "Application Frame Host": 5.73548698425293,
+                    "Skype": 2.6840708255767822,
+                    "Microsoft Edge": 32.82584571838379
+                },
+                "categories": {
+                    "Software Development": 24.215697288513184,
+                    "Utilities": 68.48949527740479,
+                    "Communication": 2.6840708255767822
+                }
+            },
+            "17:00": {
+                "apps": {
+                    "rescuetime.com": 52.31160306930542,
+                    "Windows Explorer": 36.18063497543335,
+                    "Application Frame Host": 5.297959327697754,
+                    "Skype": 12.284866094589233,
+                    "Microsoft Edge": 10.079479694366455
+                },
+                "categories": {
+                    "Miscellaneous": 52.31160306930542,
+                    "Utilities": 51.55807399749756,
+                    "Communication": 12.284866094589233
+                }
+            }
+        }
+    },
+    "2024-12-10": {
+        "apps": {
+            "Visual Studio Code": 568.6124887466431,
+            "Windows Explorer": 9259.48783993721,
+            "Microsoft Edge": 107.28947401046753,
+            "Application Frame Host": 15.643239974975586,
+            "": 11.03362488746643,
+            "chat.openai.com": 0.9885745048522949,
+            "rescuetime.com": 7.900353670120239,
+            "chatgpt.com": 5.044071197509766,
+            "Rize": 6.015751123428345,
+            "Skype": 3.7920405864715576,
+            "Notion": 6.011693000793457,
+            "LockApp.exe": 18.70234489440918
+        },
+        "categories": {
+            "Software Development": 568.6124887466431,
+            "Utilities": 9382.420553922653,
+            "Miscellaneous": 50.652342081069946,
+            "Reference & Learning": 5.044071197509766,
+            "Communication": 3.7920405864715576
+        },
+        "hourly": {
+            "09:00": {
+                "apps": {
+                    "Visual Studio Code": 51.682318449020386
+                },
+                "categories": {
+                    "Software Development": 51.682318449020386
+                }
+            },
+            "10:00": {
+                "apps": {
+                    "Visual Studio Code": 100.98575901985168,
+                    "Windows Explorer": 37.45750641822815,
+                    "Microsoft Edge": 88.83562469482422,
+                    "Application Frame Host": 15.643239974975586,
+                    "": 11.03362488746643,
+                    "chat.openai.com": 0.9885745048522949,
+                    "rescuetime.com": 4.031397342681885,
+                    "chatgpt.com": 5.044071197509766,
+                    "Rize": 6.015751123428345,
+                    "Skype": 3.7920405864715576,
+                    "Notion": 6.011693000793457
+                },
+                "categories": {
+                    "Software Development": 100.98575901985168,
+                    "Utilities": 141.93637108802795,
+                    "Miscellaneous": 28.081040859222412,
+                    "Reference & Learning": 5.044071197509766,
+                    "Communication": 3.7920405864715576
+                }
+            },
+            "11:00": {
+                "apps": {
+                    "Visual Studio Code": 412.65566396713257,
+                    "Microsoft Edge": 12.318727016448975,
+                    "Windows Explorer": 1.997528076171875
+                },
+                "categories": {
+                    "Software Development": 412.65566396713257,
+                    "Utilities": 14.31625509262085
+                }
+            },
+            "14:00": {
+                "apps": {
+                    "Windows Explorer": 9216.191852807999,
+                    "LockApp.exe": 18.70234489440918,
+                    "Visual Studio Code": 3.2887473106384277
+                },
+                "categories": {
+                    "Utilities": 9216.191852807999,
+                    "Miscellaneous": 18.70234489440918,
+                    "Software Development": 3.2887473106384277
+                }
+            },
+            "17:00": {
+                "apps": {
+                    "Microsoft Edge": 6.135122299194336,
+                    "rescuetime.com": 3.8689563274383545,
+                    "Windows Explorer": 3.8409526348114014
+                },
+                "categories": {
+                    "Utilities": 9.976074934005737,
+                    "Miscellaneous": 3.8689563274383545
+                }
+            }
+        }
+    }
+}

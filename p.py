@@ -68,34 +68,59 @@
 # else:
 #     print("No active window or failed to retrieve path.")
 
-from pywinauto import Application
+# from pywinauto import Application
 
-from urllib.parse import urlparse
+# from urllib.parse import urlparse
 
-try:
-    app = Application(backend='uia')
-    app.connect(title_re=".*Chrome.*")
+# try:
+#     app = Application(backend='uia')
+#     app.connect(title_re=".*Chrome.*")
     
-    dlg = app.top_window()
+#     dlg = app.top_window()
     
-    element_name = "Address and search bar"
-    url_bar = dlg.child_window(title=element_name, control_type="Edit")
-    
-    
-    # Get URL and ensure it has a protocol
-    url = url_bar.get_value()
-    if not url.startswith(('http://', 'https://')):
-        url = 'https://' + url
+#     element_name = "Address and search bar"
+#     url_bar = dlg.child_window(title=element_name, control_type="Edit")
     
     
-    # Parse URL
-    parsed_url = urlparse(url)
-    print(parsed_url)
-    domain = parsed_url.netloc
-    print(domain)
+#     # Get URL and ensure it has a protocol
+#     url = url_bar.get_value()
+#     if not url.startswith(('http://', 'https://')):
+#         url = 'https://' + url
+    
+    
+#     # Parse URL
+#     parsed_url = urlparse(url)
+#     print(parsed_url)
+#     domain = parsed_url.netloc
+#     print(domain)
 
     
-    print(f"Final domain: {domain}")
+#     print(f"Final domain: {domain}")
 
-except Exception as e:
-    print(f"Error occurred: {str(e)}")
+# except Exception as e:
+#     print(f"Error occurred: {str(e)}")
+
+# from datetime import datetime, timedelta
+
+# # Define the starting time and step
+
+# # Print the current time
+# # Print the current time in hour:minute AM/PM format
+# current_time = datetime.now()
+# formatted_time = current_time.strftime("%I:%M %p")
+# print(f"Current time: {formatted_time}")
+
+
+import psutil
+
+def list_chrome_processes():
+    chrome_processes = []
+    for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
+        if proc.info['name'] == 'chrome.exe':
+            chrome_processes.append(proc.info)
+    return chrome_processes
+
+# Example Usage
+for chrome_proc in list_chrome_processes():
+    
+    print(f"PID: {chrome_proc['pid']}, Command: {chrome_proc['cmdline']}")

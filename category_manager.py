@@ -1,5 +1,5 @@
 # category_manager.py
-from typing import Dict, Optional
+from typing import Dict
 
 class CategoryManager:
     def __init__(self, categories: Dict):
@@ -13,6 +13,7 @@ class CategoryManager:
             for app in data["apps"]:
                 #app_map["Visual Studio Code"] = "WORK"
                 app_map[app] = category
+        #print(app_map)
         return app_map
 
     def get_app_category(self, app_name: str) -> str:

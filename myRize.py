@@ -21,6 +21,7 @@ from PyQt6.QtWidgets import (
     QMessageBox,
 )
 from category_manager import CategoryManager
+
 from config import APP_CATEGORIES
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
@@ -41,16 +42,20 @@ def get_exe_description(file_path):
 def get_active_window():
     hwnd = win32gui.GetForegroundWindow()
     _, pid = win32process.GetWindowThreadProcessId(hwnd)
+    if pid <= 0:
+        return None
     try:
+         
         process = psutil.Process(pid)
         process_title = process.name()
+       # print(process_title)
         file_path = process.exe()
         window_title = win32gui.GetWindowText(hwnd)
        
         active_app = None
         if process_title.lower() != "chrome.exe":
              active_app = get_exe_description(file_path)
-             return active_app
+             return active_app,process_title
         elif process_title.lower() == "chrome.exe":
             try:
                 app = Application(backend='uia')
@@ -65,11 +70,11 @@ def get_active_window():
   
                 parsed_url = urlparse(url)
                 active_app = parsed_url.netloc
-                return active_app
+                return active_app,process_title
             except Exception:
-                return None
+                return None,None
     except (psutil.NoSuchProcess, psutil.AccessDenied):
-        return None
+        return None,None
 
 
 class ActiveWindowMonitor(QMainWindow):
@@ -114,11 +119,12 @@ class ActiveWindowMonitor(QMainWindow):
 
         self.isPopUpActive = False
         # save data real time
-        # self.save_timer = QTimer(self)
-        # self.save_timer.timeout.connect(self.save_data)
-        # self.save_timer.start(1000)
+        self.save_timer = QTimer(self)
+        self.save_timer.timeout.connect(self.save_data)
+        self.save_timer.start(60000)
 
-        self.allowed_apps = ["Code.exe", "chrome.exe", "python.exe", "explorer.exe"]
+        self.allowed_apps = [ "python.exe","WindowsTerminal.exe", "Code.exe","devenv.exe","explorer.exe"]
+        self.distracted_apps = ["skype.exe","chrome.exe" ]
         self.start_time = time.time()
         self.load_data()
 
@@ -139,27 +145,27 @@ class ActiveWindowMonitor(QMainWindow):
         self.figure, _ = plot_chart(new_date)
         self.canvas.figure = self.figure
         self.canvas.draw()
-
-    def show_popup(self, current_app, title):
+        
+    def show_popup(self, process_title, current_app):
         if self.isPopUpActive:
             return
         self.isPopUpActive = True
-
+        
         msg_box = QMessageBox()
         msg_box.setIcon(QMessageBox.Icon.Question)
         msg_box.setMinimumSize(1000, 1000)
         timeout_seconds = 5
-        msg_box.setText(f"{title} is not allowed.")
+        msg_box.setText(f"{current_app} is not allowed.")
         msg_box.setInformativeText(f"Getting distracted in {timeout_seconds} seconds.")
         dismiss_button = msg_box.addButton("Dismiss", QMessageBox.ButtonRole.AcceptRole)
         stay_focus_button = msg_box.addButton(
             "Stay Focus", QMessageBox.ButtonRole.DestructiveRole
         )
         msg_box.setDefaultButton(dismiss_button)
-
+        
         countdown_timer = QTimer()
         countdown_timer.setInterval(1000)
-
+        
         def update_countdown():
             nonlocal timeout_seconds
             timeout_seconds -= 1
@@ -169,49 +175,78 @@ class ActiveWindowMonitor(QMainWindow):
             if timeout_seconds == 0:
                 countdown_timer.stop()
                 msg_box.accept()
-                os.system(f"taskkill /f /im {current_app}")
-
+                os.system(f"taskkill /f /im {process_title}")
+        
         countdown_timer.timeout.connect(update_countdown)
         countdown_timer.start()
-
+        
         loop = QEventLoop()
         msg_box.finished.connect(loop.quit)
         msg_box.show()
         loop.exec()
-
+        
         countdown_timer.stop()
         self.isPopUpActive = False
         if msg_box.clickedButton() == dismiss_button:
-            self.allowed_apps.append(current_app)
+            self.allowed_apps.append(process_title)
             return True
         elif msg_box.clickedButton() == stay_focus_button:
-            os.system(f"taskkill /f /im {current_app}")
+            os.system(f"taskkill /f /im {process_title}")
             return False
-        return False
-
-    def close_unallowed_app(self, app, win_app):
-        if not self.show_popup(app, win_app):
+        return False 
+    
+    def close_unallowed_app(self, process_title, app):
+        if not self.show_popup(process_title, app):
             os.system(f"taskkill /f /im {app}")
             time.sleep(0.5)
+
+    def update_time_spent(self, time_diff, app, category, date, hour=None):
+      
+        if date not in self.time_spent:
+            self.time_spent[date] = {"apps": {}, "categories": {}, "hourly": {}}
+        
+        if app not in self.time_spent[date]["apps"]:
+            self.time_spent[date]["apps"][app] = 0
+        self.time_spent[date]["apps"][app] += time_diff
+        
+        if category not in self.time_spent[date]["categories"]:
+            self.time_spent[date]["categories"][category] = 0
+        self.time_spent[date]["categories"][category] += time_diff
+        
+        if hour is not None:
+            if hour not in self.time_spent[date]["hourly"]:
+                self.time_spent[date]["hourly"][hour] = {"apps": {}, "categories": {}}
+            
+            if app not in self.time_spent[date]["hourly"][hour]["apps"]:
+                self.time_spent[date]["hourly"][hour]["apps"][app] = 0
+            self.time_spent[date]["hourly"][hour]["apps"][app] += time_diff
+            
+            if category not in self.time_spent[date]["hourly"][hour]["categories"]:
+                self.time_spent[date]["hourly"][hour]["categories"][category] = 0
+            self.time_spent[date]["hourly"][hour]["categories"][category] += time_diff
 
     def update_active_window(self):
         current_date = time.strftime("%Y-%m-%d")
         current_time = time.time()
-        active_app = get_active_window()
+        current_hour = time.strftime("%H:00") 
+        result = get_active_window()
+        
+        if not result:
+            return
+        else:
+            current_app , process_title = result
+   
 
-        # if active_app:
-        #    print(active_app)
-
-        current_app = active_app
-
-        # if process_name not in self.allowed_apps:
-        #     self.close_unallowed_app(process_name, win_app)
-
+        if process_title not in self.allowed_apps:
+            if process_title in self.distracted_apps:
+               os.system(f"taskkill /f /im {process_title}")
+            else:
+                self.close_unallowed_app(process_title, current_app)
+     
         if not hasattr(self, "last_date"):
             self.last_date = current_date
 
         if current_date != self.last_date:
-            self.save_data()
             self.last_switch_time = current_time
             self.last_app = None
             self.last_date = current_date
@@ -220,24 +255,13 @@ class ActiveWindowMonitor(QMainWindow):
             if self.last_app is not None:
                 time_diff = current_time - self.last_switch_time
                 
-                if self.last_date not in self.time_spent:
-                    self.time_spent[self.last_date] = {"apps": {}, "categories": {}}
-                
-                if self.last_app not in self.time_spent[self.last_date]["apps"]:
-                    self.time_spent[self.last_date]["apps"][self.last_app] = 0
-                
-                self.time_spent[self.last_date]["apps"][self.last_app] += time_diff
-                
                 category = self.category_manager.get_app_category(self.last_app)
-                if category not in self.time_spent[self.last_date]["categories"]:
-                    self.time_spent[self.last_date]["categories"][category] = 0
-                
-                self.time_spent[self.last_date]["categories"][category] += time_diff
 
+                self.update_time_spent(time_diff, self.last_app, category, self.last_date, current_hour)
 
             self.last_app = current_app
             self.last_switch_time = current_time
-
+       
         # self.figure = plot_chart()
         # self.canvas.figure = self.figure
         # self.canvas.draw()
@@ -247,32 +271,23 @@ class ActiveWindowMonitor(QMainWindow):
             with open("activity_data.json", "r") as file:
                 self.time_spent = json.load(file)
 
+  
     def save_data(self):
-        if self.isPopUpActive:
-            return
+            if self.isPopUpActive:
+                return
 
-        current_time = time.time()
-        current_date = time.strftime("%Y-%m-%d")
+            current_time = time.time()
+            current_date = time.strftime("%Y-%m-%d")
+            current_hour = time.strftime("%H:00")  
 
-        if self.last_app:
+            if self.last_app:
+                time_diff = current_time - self.last_switch_time
+                category = self.category_manager.get_app_category(self.last_app)
+                self.update_time_spent(time_diff, self.last_app, category, current_date, current_hour)
+                self.last_switch_time = current_time
 
-            time_diff = current_time - self.last_switch_time
-
-            if self.last_date not in self.time_spent[self.last_date]:
-                 self.time_spent[self.last_date] = {"apps": {}, "categories": {}}
-            self.last_switch_time = current_time
-
-            if self.last_app not in self.time_spent[self.last_date]["apps"]:
-                self.time_spent[self.last_date]["apps"][self.last_app] = 0
-            self.time_spent[self.last_date]["apps"][self.last_app] += time_diff
-                
-            category = self.category_manager.get_app_category(self.last_app)
-            if category not in self.time_spent[self.last_date]["categories"]:
-                self.time_spent[self.last_date]["categories"][category] = 0    
-            self.time_spent[self.last_date]["categories"][category] += time_diff
-
-        with open("activity_data.json", "w") as file:
-            json.dump(self.time_spent, file)
+            with open("activity_data.json", "w") as file:
+                json.dump(self.time_spent, file, indent=4)
 
     def closeEvent(self, event):
         self.save_data()

@@ -47,10 +47,12 @@ def plot_chart(date):
     try:
         with open("activity_data.json") as f:
             data = json.load(f)
+            print(data)
             if date and date in data:
                 day_data = data[date]
-                apps = list(day_data.keys())
-                times = list(day_data.values())
+                app = day_data['apps']
+                apps = list(app.keys())
+                times = list(app.values())
             else:
                 raise KeyError(f"The date {date} does not exist in the data.")
     except (KeyError, FileNotFoundError) as e:
@@ -128,5 +130,5 @@ def plot_chart(date):
     return fig, (ax1, ax2)
 
 
-plot_chart("2024-11-29")
+plot_chart("2024-12-05")
 plt.show()
