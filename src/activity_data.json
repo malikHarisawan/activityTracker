@@ -382,5 +382,314 @@
                 }
             }
         }
+    },
+    "2024-12-11": {
+        "apps": {
+            "Skype": 55.429993629455566,
+            "Windows Explorer": 119.01359057426453,
+            "Visual Studio Code": 268.24092078208923,
+            "WindowsTerminal.exe": 8.009095907211304,
+            "Task Manager": 18.02342176437378,
+            "Application Frame Host": 76.98793649673462,
+            "Microsoft Edge": 101.32655572891235,
+            "google.com": 56.37700271606445,
+            "tasklytic.framer.website": 20.134403228759766,
+            "youtube.com": 23.175049781799316,
+            "mail.google.com": 15.069739818572998,
+            "jenpharm.com": 4.035669565200806,
+            "karnaugh maps": 1.0055217742919922,
+            "rescuetime.com": 54.600016593933105
+        },
+        "categories": {
+            "Communication": 70.49973344802856,
+            "Utilities": 297.3280827999115,
+            "Miscellaneous": 302.9576334953308,
+            "Software Development": 276.25001668930054,
+            "Reference & Learning": 79.55205249786377
+        },
+        "hourly": {
+            "10:00": {
+                "apps": {
+                    "Skype": 14.850218772888184,
+                    "Windows Explorer": 6.052612066268921,
+                    "": 0.9924845695495605,
+                    "Visual Studio Code": 70.10017037391663
+                },
+                "categories": {
+                    "Communication": 14.850218772888184,
+                    "Utilities": 6.052612066268921,
+                    "Miscellaneous": 0.9924845695495605,
+                    "Software Development": 70.10017037391663
+                }
+            },
+            "11:00": {
+                "apps": {
+                    "Windows Explorer": 53.650248765945435,
+                    "WindowsTerminal.exe": 5.021229982376099,
+                    "": 177.04959058761597,
+                    "Task Manager": 18.02342176437378,
+                    "Skype": 7.152565956115723,
+                    "Visual Studio Code": 98.4579529762268,
+                    "Application Frame Host": 31.31053590774536,
+                    "Microsoft Edge": 24.48674488067627,
+                    "google.com": 47.887505531311035,
+                    "tasklytic.framer.website": 20.134403228759766,
+                    "youtube.com": 23.175049781799316,
+                    "mail.google.com": 15.069739818572998,
+                    "jenpharm.com": 4.035669565200806,
+                    "karnaugh maps": 1.0055217742919922
+                },
+                "categories": {
+                    "Utilities": 109.44752955436707,
+                    "Software Development": 103.4791829586029,
+                    "Miscellaneous": 20.2486069202423,
+                    "Communication": 22.22230577468872,
+                    "Reference & Learning": 71.06255531311035
+                }
+            },
+            "14:00": {
+                "apps": {
+                    "WindowsTerminal.exe": 1.9997797012329102,
+                    "Windows Explorer": 7.033753871917725,
+                    "rescuetime.com": 34.51948165893555,
+                    "Visual Studio Code": 19.141297101974487,
+                    "google.com": 7.4777116775512695
+                },
+                "categories": {
+                    "Software Development": 21.141076803207397,
+                    "Utilities": 7.033753871917725,
+                    "Miscellaneous": 51.59699511528015,
+                    "Reference & Learning": 7.4777116775512695
+                }
+            },
+            "15:00": {
+                "apps": {
+                    "Windows Explorer": 15.658183813095093,
+                    "rescuetime.com": 20.08053493499756,
+                    "google.com": 1.0117855072021484,
+                    "Visual Studio Code": 78.54953598976135,
+                    "Skype": 2.017911672592163
+                },
+                "categories": {
+                    "Utilities": 15.658183813095093,
+                    "Miscellaneous": 30.11954689025879,
+                    "Reference & Learning": 1.0117855072021484,
+                    "Software Development": 78.54953598976135,
+                    "Communication": 2.017911672592163
+                }
+            },
+            "16:00": {
+                "apps": {
+                    "WindowsTerminal.exe": 0.9880862236022949,
+                    "Windows Explorer": 36.61879205703735,
+                    "Microsoft Edge": 76.83981084823608,
+                    "Application Frame Host": 45.67740058898926,
+                    "Skype": 31.409297227859497,
+                    "Visual Studio Code": 1.991964340209961
+                },
+                "categories": {
+                    "Software Development": 2.980050563812256,
+                    "Utilities": 159.1360034942627,
+                    "Communication": 31.409297227859497
+                }
+            }
+        }
+    },
+    "2024-12-12": {
+        "apps": {
+            "Application Frame Host": 97.55326390266418,
+            "Windows Explorer": 166.8017611503601,
+            "Microsoft Edge": 46.00811243057251,
+            "Visual Studio Code": 1579.7465436458588,
+            "WindowsTerminal.exe": 1.0029840469360352,
+            "google.com": 5.021518230438232,
+            "": 120.8588764667511,
+            "chat.openai.com": 36.72553038597107,
+            "chatgpt.com": 111.06628823280334,
+            "mail.google.com": 22.641914129257202,
+            "Windows Shell Experience Host": 2.7252964973449707,
+            "Skype": 45.92472052574158,
+            "colorhunt.co": 142.2883746623993,
+            "c": 7.0159056186676025,
+            "www.youtube.com": 9.022438764572144,
+            " ": 7.051635026931763,
+            "youtube.com": 64.16635704040527,
+            "to": 1.0134809017181396
+        },
+        "categories": {
+            "Utilities": 310.3631374835968,
+            "Software Development": 1580.7495276927948,
+            "Reference & Learning": 180.25416350364685,
+            "Miscellaneous": 326.7015383243561,
+            "Communication": 68.56663465499878
+        },
+        "hourly": {
+            "10:00": {
+                "apps": {
+                    "Application Frame Host": 33.25862956047058,
+                    "Windows Explorer": 83.14139294624329,
+                    "Microsoft Edge": 6.966543197631836,
+                    "Visual Studio Code": 64.48990678787231,
+                    "WindowsTerminal.exe": 1.0029840469360352
+                },
+                "categories": {
+                    "Utilities": 123.3665657043457,
+                    "Software Development": 65.49289083480835
+                }
+            },
+            "11:00": {
+                "apps": {
+                    "Microsoft Edge": 32.49244141578674,
+                    "Windows Explorer": 16.121424913406372,
+                    "google.com": 5.021518230438232,
+                    "": 18.200677156448364,
+                    "chat.openai.com": 5.3771889209747314,
+                    "chatgpt.com": 10.036325454711914,
+                    "Visual Studio Code": 6.021044015884399,
+                    "Application Frame Host": 25.352295398712158
+                },
+                "categories": {
+                    "Utilities": 73.96616172790527,
+                    "Reference & Learning": 15.057843685150146,
+                    "Miscellaneous": 23.577866077423096,
+                    "Software Development": 6.021044015884399
+                }
+            },
+            "12:00": {
+                "apps": {
+                    "mail.google.com": 16.70661973953247,
+                    "": 23.12628960609436,
+                    "chat.openai.com": 20.21391201019287,
+                    "chatgpt.com": 40.28975033760071,
+                    "Visual Studio Code": 20.120214700698853,
+                    "Microsoft Edge": 6.549127817153931,
+                    "Windows Explorer": 13.666387796401978,
+                    "Application Frame Host": 23.075793027877808,
+                    "Windows Shell Experience Host": 2.7252964973449707,
+                    "Skype": 2.048621654510498
+                },
+                "categories": {
+                    "Communication": 18.75524139404297,
+                    "Miscellaneous": 46.0654981136322,
+                    "Reference & Learning": 40.28975033760071,
+                    "Software Development": 20.120214700698853,
+                    "Utilities": 43.291308641433716
+                }
+            },
+            "14:00": {
+                "apps": {
+                    "Visual Studio Code": 41.201916456222534,
+                    "mail.google.com": 5.9352943897247314,
+                    "chat.openai.com": 8.110178232192993,
+                    "Windows Explorer": 14.508132696151733,
+                    "colorhunt.co": 112.25563931465149,
+                    "": 32.180129289627075,
+                    "c": 7.0159056186676025,
+                    "www.youtube.com": 9.022438764572144,
+                    "Skype": 11.674317598342896,
+                    " ": 7.051635026931763
+                },
+                "categories": {
+                    "Software Development": 41.201916456222534,
+                    "Communication": 17.609611988067627,
+                    "Miscellaneous": 175.63592624664307,
+                    "Utilities": 14.508132696151733
+                }
+            },
+            "15:00": {
+                "apps": {
+                    "Visual Studio Code": 386.9650104045868,
+                    "colorhunt.co": 23.092888116836548,
+                    "": 44.33702063560486,
+                    "youtube.com": 64.16635704040527,
+                    "Windows Explorer": 6.1577277183532715,
+                    "Skype": 5.852445840835571,
+                    "to": 1.0134809017181396,
+                    "Application Frame Host": 11.091777324676514
+                },
+                "categories": {
+                    "Software Development": 386.9650104045868,
+                    "Miscellaneous": 68.44338965415955,
+                    "Reference & Learning": 64.16635704040527,
+                    "Utilities": 17.249505043029785,
+                    "Communication": 5.852445840835571
+                }
+            },
+            "16:00": {
+                "apps": {
+                    "Skype": 26.349335432052612,
+                    "Windows Explorer": 33.20669507980347,
+                    "colorhunt.co": 6.939847230911255,
+                    "chatgpt.com": 60.74021244049072,
+                    "chat.openai.com": 3.0242512226104736,
+                    "Visual Studio Code": 1060.9484512805939,
+                    "": 3.0147597789764404,
+                    "Application Frame Host": 4.774768590927124
+                },
+                "categories": {
+                    "Communication": 26.349335432052612,
+                    "Utilities": 37.98146367073059,
+                    "Miscellaneous": 12.978858232498169,
+                    "Reference & Learning": 60.74021244049072,
+                    "Software Development": 1060.9484512805939
+                }
+            }
+        }
+    },
+    "2024-12-13": {
+        "apps": {
+            "Windows Explorer": 85.70611119270325,
+            "Application Frame Host": 343.48356914520264,
+            "Visual Studio Code": 316.43935108184814,
+            "": 10.043519735336304,
+            "Microsoft Edge": 110.79973077774048,
+            "Rize": 303.5697777271271,
+            "chat.openai.com": 3.007188558578491,
+            "chatgpt.com": 601.3517806529999,
+            "gemini.google.com": 6.035343885421753,
+            "LockApp.exe": 565.805223941803
+        },
+        "categories": {
+            "Utilities": 539.9894111156464,
+            "Software Development": 316.43935108184814,
+            "Miscellaneous": 888.4610538482666,
+            "Reference & Learning": 601.3517806529999
+        },
+        "hourly": {
+            "10:00": {
+                "apps": {
+                    "Windows Explorer": 12.068411827087402,
+                    "Application Frame Host": 207.87426233291626,
+                    "Visual Studio Code": 77.55285882949829,
+                    "": 1.0033550262451172,
+                    "Microsoft Edge": 95.69524812698364
+                },
+                "categories": {
+                    "Utilities": 315.6379222869873,
+                    "Software Development": 77.55285882949829,
+                    "Miscellaneous": 1.0033550262451172
+                }
+            },
+            "11:00": {
+                "apps": {
+                    "Application Frame Host": 135.60930681228638,
+                    "Visual Studio Code": 238.88649225234985,
+                    "Windows Explorer": 73.63769936561584,
+                    "Microsoft Edge": 15.104482650756836,
+                    "Rize": 303.5697777271271,
+                    "": 9.040164709091187,
+                    "chat.openai.com": 3.007188558578491,
+                    "chatgpt.com": 601.3517806529999,
+                    "gemini.google.com": 6.035343885421753,
+                    "LockApp.exe": 565.805223941803
+                },
+                "categories": {
+                    "Utilities": 224.35148882865906,
+                    "Software Development": 238.88649225234985,
+                    "Miscellaneous": 887.4576988220215,
+                    "Reference & Learning": 601.3517806529999
+                }
+            }
+        }
     }
 }

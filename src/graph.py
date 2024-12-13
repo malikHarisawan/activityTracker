@@ -3,13 +3,12 @@ from pathlib import Path
 from datetime import datetime
 
 import matplotlib.pyplot as plt
-
 APP_CATEGORIES = {
-    "Software Development": {"color": "#2E7D32"},   # Green
-    "Reference & Learning": {"color": "#1976D2"},   # Blue
-    "Communication": {"color": "#C62828"}, # Red
-    "Utilities": {"color": "#F9A825"},      # Yellow
-    "Miscellaneous": {"color": "#757575"}  # Grey
+    "Software Development": {"color": "#001A6E"},   # Blue
+    "Reference & Learning": {"color": "#074799"},   # Light Blue
+    "Utilities": {"color": "#009990"},              # Grey
+    "Communication": {"color": "#E1FFBB"},  # Pale Blue
+    "Miscellaneous": {"color": "#FFF0DC"}          # Orange
 }
 
 def get_data_for_date(date):
@@ -69,7 +68,7 @@ def plot_chart(date):
         ax1.text(v + 1, i, f"{v:.1f}%", va='center')
 
     
-    explode = tuple(0.1 if i == 1 else 0 for i in range(len(categories))) 
+    explode = tuple(0.1 if i == 1 or i == 3 else 0 for i in range(len(categories))) 
    
     ax3.pie(times, explode=explode, labels=None, autopct='%1.1f%%',
        shadow=True, startangle=90,colors = colors)
