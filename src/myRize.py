@@ -113,7 +113,9 @@ class ActiveWindowMonitor(QMainWindow):
 
         current_app, process_title, dlg = result
         self._handle_restricted_domains(current_app, dlg)
-            
+        
+        if current_app == "Application Frame Host":
+            current_app =  "Calculator"
 
         if process_title not in ALLOWED_APPS:
             if process_title in DISTRACTED_APPS:

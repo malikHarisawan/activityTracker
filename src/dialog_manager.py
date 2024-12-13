@@ -63,7 +63,7 @@ class DistractedAppDialog(QDialog):
         self.move(center_point - self.rect().center())
 
     def _get_message(self):
-        return f"{self.current_app} is not allowed.\n  Getting distracted."
+        return f"{self.current_app} is not allowed.\n\nGetting distracted."
 
     def dismiss_action(self):
         self.accept()

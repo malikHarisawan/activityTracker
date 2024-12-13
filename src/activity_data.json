@@ -638,22 +638,27 @@
     },
     "2024-12-13": {
         "apps": {
-            "Windows Explorer": 85.70611119270325,
-            "Application Frame Host": 343.48356914520264,
-            "Visual Studio Code": 316.43935108184814,
+            "Windows Explorer": 87.70493507385254,
+            "Visual Studio Code": 342.60319924354553,
             "": 10.043519735336304,
             "Microsoft Edge": 110.79973077774048,
             "Rize": 303.5697777271271,
             "chat.openai.com": 3.007188558578491,
-            "chatgpt.com": 601.3517806529999,
+            "chatgpt.com": 607.3783438205719,
             "gemini.google.com": 6.035343885421753,
-            "LockApp.exe": 565.805223941803
+            "LockApp.exe": 565.805223941803,
+            "Windows Shell Experience Host": 4.03281044960022,
+            "Skype": 10.062787055969238,
+            "github.com": 88.79128623008728,
+            "youtube.com": 56.46930265426636,
+            "Calculator": 4.601614475250244
         },
         "categories": {
-            "Utilities": 539.9894111156464,
-            "Software Development": 316.43935108184814,
-            "Miscellaneous": 888.4610538482666,
-            "Reference & Learning": 601.3517806529999
+            "Utilities": 632.0716640949249,
+            "Software Development": 431.3944854736328,
+            "Miscellaneous": 897.0954787731171,
+            "Reference & Learning": 663.8476464748383,
+            "Communication": 10.062787055969238
         },
         "hourly": {
             "10:00": {
@@ -688,6 +693,33 @@
                     "Software Development": 238.88649225234985,
                     "Miscellaneous": 887.4576988220215,
                     "Reference & Learning": 601.3517806529999
+                }
+            },
+            "12:00": {
+                "apps": {
+                    "Windows Shell Experience Host": 4.03281044960022,
+                    "Skype": 10.062787055969238,
+                    "github.com": 88.79128623008728,
+                    "chatgpt.com": 6.0265631675720215,
+                    "youtube.com": 56.46930265426636,
+                    "Visual Studio Code": 26.163848161697388,
+                    "Application Frame Host": 90.08342909812927,
+                    "Windows Explorer": 1.998823881149292
+                },
+                "categories": {
+                    "Miscellaneous": 4.03281044960022,
+                    "Communication": 10.062787055969238,
+                    "Software Development": 114.95513439178467,
+                    "Reference & Learning": 62.49586582183838,
+                    "Utilities": 92.08225297927856
+                }
+            },
+            "13:00": {
+                "apps": {
+                    "Calculator": 4.601614475250244
+                },
+                "categories": {
+                    "Miscellaneous": 4.601614475250244
                 }
             }
         }
